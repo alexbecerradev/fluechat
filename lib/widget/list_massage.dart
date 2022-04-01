@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:fluechat/pages/constant.dart';
 import 'package:fluechat/pages/personal_chat.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 class ListMessage extends StatelessWidget {
   final Map<String, dynamic> data;
 
-  ListMessage(this.data);
+  // ignore: prefer_const_constructors_in_immutables
+  ListMessage(this.data, {Key? key}) : super(key: key);
 
   get greenColor => const Color.fromARGB(200, 14, 172, 0);
   get greyColor => const Color.fromARGB(200, 114, 114, 114);
@@ -91,38 +93,36 @@ class ListMessage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  Text(
-                    data['last_msg_dtm'],
-                    style: GoogleFonts.poppins(
-                      fontSize: 10,
-                      color: primaryColor,
-                    ),
+            Column(
+              children: [
+                Text(
+                  data['last_msg_dtm'],
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    color: primaryColor,
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  (data['unread'])
-                      ? Container(
-                          height: 14,
-                          width: 14,
-                          decoration: BoxDecoration(
-                            color: primaryColor,
-                            shape: BoxShape.circle,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                (data['unread'])
+                    ? Container(
+                        height: 14,
+                        width: 14,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '1',
+                            style: GoogleFonts.poppins(
+                                fontSize: 8, color: Colors.white),
                           ),
-                          child: Center(
-                            child: Text(
-                              '1',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 8, color: Colors.white),
-                            ),
-                          ),
-                        )
-                      : SizedBox()
-                ],
-              ),
+                        ),
+                      )
+                    : const SizedBox()
+              ],
             ),
           ],
         ),

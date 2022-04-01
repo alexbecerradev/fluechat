@@ -68,55 +68,48 @@ class _PersonalChatState extends State<PersonalChat> {
                           const SizedBox(
                             width: 16,
                           ),
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.data['name'],
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Text(
-                                  'Online',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.data['name'],
+                                style: GoogleFonts.poppins(
+                                    fontSize: 14,
                                     color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 24,
-                              width: 24,
-                              child: const Icon(
-                                Icons.call,
-                                color: Colors.white,
+                                    fontWeight: FontWeight.w600),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Container(
-                              height: 24,
-                              width: 24,
-                              child: const Center(
-                                child: Icon(
-                                  Icons.video_call,
+                              Text(
+                                'Online',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
                                   color: Colors.white,
                                 ),
                               ),
+                            ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: const [
+                          SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: Icon(
+                              Icons.call,
+                              color: Colors.white,
                             ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: Center(
+                              child: Icon(
+                                Icons.video_call,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -161,9 +154,9 @@ class _PersonalChatState extends State<PersonalChat> {
                                   decoration: BoxDecoration(
                                     color: greyColor,
                                     borderRadius: const BorderRadius.only(
-                                      topRight: const Radius.circular(16),
-                                      topLeft: const Radius.circular(16),
-                                      bottomRight: const Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                      topLeft: Radius.circular(16),
+                                      bottomRight: Radius.circular(16),
                                     ),
                                   ),
                                   child: Text(
@@ -248,9 +241,9 @@ class _PersonalChatState extends State<PersonalChat> {
                                   decoration: BoxDecoration(
                                     color: greyColor,
                                     borderRadius: const BorderRadius.only(
-                                      topRight: const Radius.circular(16),
-                                      topLeft: const Radius.circular(16),
-                                      bottomRight: const Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                      topLeft: Radius.circular(16),
+                                      bottomRight: Radius.circular(16),
                                     ),
                                   ),
                                   child: Text(
@@ -366,12 +359,12 @@ class _PersonalChatState extends State<PersonalChat> {
                                   const EdgeInsets.symmetric(horizontal: 16),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(Icons.emoji_emotions_sharp),
-                                  const SizedBox(
+                                children: const [
+                                  Icon(Icons.emoji_emotions_sharp),
+                                  SizedBox(
                                     width: 8,
                                   ),
-                                  const Icon(Icons.attach_file),
+                                  Icon(Icons.attach_file),
                                 ],
                               ),
                             ),
@@ -385,8 +378,8 @@ class _PersonalChatState extends State<PersonalChat> {
                                   color: primaryColor.withOpacity(0.1),
                                 )),
                             enabledBorder: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                    const Radius.circular(24)),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(24)),
                                 borderSide: BorderSide(
                                   color: primaryColor.withOpacity(0.1),
                                 )),

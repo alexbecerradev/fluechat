@@ -5,6 +5,7 @@ class Activities extends StatelessWidget {
   final Map<String, dynamic> data;
   final bool isFirst;
 
+  // ignore: use_key_in_widget_constructors
   const Activities(this.data, this.isFirst);
 
   get primaryColor => const Color.fromARGB(255, 45, 41, 66);

@@ -4,6 +4,7 @@ class ListActivities extends StatelessWidget {
   final Map<String, dynamic> data;
   final bool isFirst;
 
+  // ignore: use_key_in_widget_constructors
   const ListActivities(this.data, this.isFirst);
 
   get primaryColor => null;
@@ -25,7 +26,7 @@ class ListActivities extends StatelessWidget {
                     width: 62,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: Color.fromARGB(255, 106, 167, 216)),
+                            color: const Color.fromARGB(255, 106, 167, 216)),
                         shape: BoxShape.circle),
                   ),
                   Positioned.fill(
@@ -36,7 +37,7 @@ class ListActivities extends StatelessWidget {
                         width: 60,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Color.fromARGB(255, 103, 172, 228),
+                              color: const Color.fromARGB(255, 103, 172, 228),
                               width: 2),
                           shape: BoxShape.circle,
                           image: DecorationImage(
