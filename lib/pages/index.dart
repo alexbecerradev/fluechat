@@ -4,7 +4,6 @@ import 'package:fluechat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-
 import '../verify_code.dart';
 
 class Index extends StatefulWidget {

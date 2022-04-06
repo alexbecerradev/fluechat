@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluechat/pages/chat_page.dart';
 import 'package:fluechat/pages/index.dart';
 import 'package:flutter/material.dart';
 import 'package:fluechat/main.dart';
@@ -85,7 +86,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Index()),
+                              builder: (context) => const ChatPage()),
                           (route) => false);
                     }
                   });
