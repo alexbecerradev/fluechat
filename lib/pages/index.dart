@@ -1,10 +1,11 @@
 // ignore_for_file: deprecated_member_use
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluechat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+
+import '../verify_code.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -18,10 +19,22 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
-  final TextEditingController smscontroller = TextEditingController();
+  late final String verificationId;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool showLoading = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  TextEditingController phoneController = TextEditingController();
+
+  //
+  //
+  //  //pagina index
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: primaryColor,
       body: SizedBox(
@@ -58,7 +71,7 @@ class _IndexState extends State<Index> {
               ),
             ),
             Container(
-              height: 200,
+              height: 250,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -72,34 +85,25 @@ class _IndexState extends State<Index> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 50, left: 30, right: 30),
-                        child: DropdownButton(
-                          items: null,
-                          onChanged: null,
-                          hint: const Text('+54'),
-                        ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 80, left: 50, right: 50),
                       ),
                       Container(
                         height: 50,
                         width: 200,
                         child: TextField(
-                          controller: smscontroller,
+                          controller: phoneController,
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
                           style: GoogleFonts.poppins(
                             fontSize: 17,
                             fontWeight: FontWeight.normal,
                             color: const Color.fromARGB(255, 4, 55, 71),
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Sign in with your number phone',
+                            hintText: 'Example: +542477303030',
                             hintStyle: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 12,
                               fontWeight: FontWeight.w300,
                               color: const Color.fromARGB(255, 0, 0, 0),
                             ),
@@ -108,19 +112,32 @@ class _IndexState extends State<Index> {
                       ),
                     ],
                   ),
+                  Text(
+                    'Sign in with your phone number',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 60),
                     child: SizedBox(
                       height: 50,
                       width: 300,
                       child: FlatButton(
                         height: 100,
                         minWidth: 100,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => const ChatPage())));
+                        onPressed: () async {
+                          setState(() {
+                            showLoading = true;
+                          });
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  OTPScreen(phoneController.text),
+                            ),
+                          );
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),

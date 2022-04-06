@@ -1,20 +1,44 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluechat/pages/index.dart';
 import 'package:flutter/material.dart';
+import 'package:fluechat/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-class LoginWithPhone extends StatefulWidget {
-  // ignore: non_constant_identifier_names, use_key_in_widget_constructors
+class OTPScreen extends StatefulWidget {
   final String phone;
-  const LoginWithPhone(this.phone);
-
+  OTPScreen(this.phone);
   @override
-
-  // ignore: no_logic_in_create_state
-  _LoginWithPhoneState createState() => _LoginWithPhoneState();
+  _OTPScreenState createState() => _OTPScreenState();
 }
 
-class _LoginWithPhoneState extends State<LoginWithPhone> {
+final controller = TextEditingController();
+final focusNode = FocusNode();
+
+@override
+void dispose() {
+  controller.dispose();
+  focusNode.dispose();
+}
+
+const borderColor = Color.fromRGBO(114, 178, 238, 1);
+const errorColor = Color.fromRGBO(255, 234, 238, 1);
+const fillColor = Color.fromRGBO(222, 231, 240, .57);
+final defaultPinTheme = PinTheme(
+  width: 56,
+  height: 60,
+  textStyle: GoogleFonts.poppins(
+    fontSize: 22,
+    color: Color.fromRGBO(30, 60, 87, 1),
+  ),
+  decoration: BoxDecoration(
+    color: fillColor,
+    borderRadius: BorderRadius.circular(8),
+    border: Border.all(color: Colors.transparent),
+  ),
+);
+
+class _OTPScreenState extends State<OTPScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   late String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
@@ -26,18 +50,20 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
       color: const Color.fromRGBO(126, 203, 224, 1),
     ),
   );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldkey,
+      appBar: AppBar(
+        title: const Text('OTP Verification'),
+      ),
       body: Column(
         children: [
           Container(
             margin: const EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Verify +1-${widget.phone}',
+                'Verify ${widget.phone}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
@@ -46,7 +72,10 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: Pinput(
-              onSubmitted: (pin) async {
+              length: 6,
+              focusNode: focusNode,
+              defaultPinTheme: defaultPinTheme,
+              onCompleted: (pin) async {
                 try {
                   await FirebaseAuth.instance
                       .signInWithCredential(PhoneAuthProvider.credential(
@@ -62,10 +91,9 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                   });
                 } catch (e) {
                   FocusScope.of(context).unfocus();
-                  _scaffoldkey.currentState
-                      // ignore: deprecated_member_use
-                      ?.showSnackBar(
-                          const SnackBar(content: Text('invalid OTP')));
+                  // ignore: deprecated_member_use
+                  _scaffoldkey.currentState?.showSnackBar(
+                      const SnackBar(content: Text('invalid OTP')));
                 }
               },
             ),
@@ -77,7 +105,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
 
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+1${widget.phone}',
+        phoneNumber: '+${widget.phone}',
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
@@ -93,13 +121,17 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
         verificationFailed: (FirebaseAuthException e) {
           print(e.message);
         },
+        codeSent: (String verficationID, int? resendToken) {
+          setState(() {
+            _verificationCode = verficationID;
+          });
+        },
         codeAutoRetrievalTimeout: (String verificationID) {
           setState(() {
             _verificationCode = verificationID;
           });
         },
-        timeout: const Duration(seconds: 120),
-        codeSent: (String verificationId, int? forceResendingToken) {});
+        timeout: const Duration(seconds: 120));
   }
 
   @override

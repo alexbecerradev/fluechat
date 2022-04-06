@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
@@ -37,16 +40,6 @@ class DefaultFirebaseOptions {
     );
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDoJKww-9CvfMvsh5cCH6olVSLrDVyVcGY',
-    appId: '1:370084007343:web:100f7169bbe222f8cd335a',
-    messagingSenderId: '370084007343',
-    projectId: 'fluechat-3f628',
-    authDomain: 'fluechat-3f628.firebaseapp.com',
-    storageBucket: 'fluechat-3f628.appspot.com',
-    measurementId: 'G-3RG457QXWV',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBEADvE-P4JXV-ZwrXp5FCnYvNM_TiMR_A',
     appId: '1:370084007343:android:25ba2f4518ed2fd0cd335a',
@@ -57,11 +50,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDe2-r4TS_8oPm0_PLXJWvWQfivJJCGv6c',
-    appId: '1:370084007343:ios:bcf266c3ec9826f3cd335a',
+    appId: '1:370084007343:ios:b672d64045c13c8ccd335a',
     messagingSenderId: '370084007343',
     projectId: 'fluechat-3f628',
     storageBucket: 'fluechat-3f628.appspot.com',
-    iosClientId: '370084007343-gfnhhe9gib8jlihnnh5nr0bthevk9bcj.apps.googleusercontent.com',
-    iosBundleId: 'fluechat.app',
+    iosClientId: '370084007343-1eifvfagp34geoktff6lmvh5gji77ihr.apps.googleusercontent.com',
+    iosBundleId: 'flue.app',
   );
 }
