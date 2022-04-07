@@ -25,7 +25,7 @@ class _IndexState extends State<Index> {
   bool showLoading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
-  TextEditingController phoneController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   //
   //

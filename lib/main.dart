@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluechat/home.dart';
+import 'package:fluechat/pages/chat_page.dart';
 import 'package:fluechat/pages/index.dart';
+import 'package:fluechat/verify_code.dart';
 import 'package:flutter/material.dart';
-
 import 'firebase_options.dart';
 
-Future<void> main() async {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,11 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Index(),
+      home: flueHome(),
     );
   }
 }
+
+
 
 //https://youtu.be/S7BZCnHeePM?t=441

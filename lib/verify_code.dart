@@ -79,10 +79,13 @@ class _OTPScreenState extends State<OTPScreen> {
               onCompleted: (pin) async {
                 try {
                   await FirebaseAuth.instance
-                      .signInWithCredential(PhoneAuthProvider.credential(
-                          verificationId: _verificationCode, smsCode: pin))
+                      .signInWithCredential(
+                    PhoneAuthProvider.credential(
+                        verificationId: _verificationCode, smsCode: pin),
+                  )
                       .then((value) async {
                     if (value.user != null) {
+                      var credential = value.user;
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -114,7 +117,7 @@ class _OTPScreenState extends State<OTPScreen> {
             if (value.user != null) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const Index()),
+                  MaterialPageRoute(builder: (context) => const ChatPage()),
                   (route) => false);
             }
           });
@@ -142,3 +145,7 @@ class _OTPScreenState extends State<OTPScreen> {
     _verifyPhone();
   }
 }
+
+
+
+//https://firebase.google.com/docs/auth/web/phone-auth
