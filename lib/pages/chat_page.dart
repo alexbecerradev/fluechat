@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:fluechat/pages/list_contacts.dart';
 import 'package:fluechat/widget/activities.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -139,7 +140,15 @@ class _ChatPageState extends State<ChatPage> {
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
-                    onPressed: (() {}),
+                    onPressed: (() {
+                      setState(() {
+                        showLoading = true;
+                      });
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const listContacts()),
+                      );
+                    }),
                     child: const Icon(Icons.sms),
                     backgroundColor: primaryColor,
                   ),

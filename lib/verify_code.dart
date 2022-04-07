@@ -85,7 +85,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   )
                       .then((value) async {
                     if (value.user != null) {
-                      var credential = value.user;
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
