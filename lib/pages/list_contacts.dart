@@ -1,20 +1,18 @@
+import 'package:fluechat/widget/contacts_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:fluechat/verify_code.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import '../widget/contacts_bloc.dart';
 
-class listContacts extends StatefulWidget {
-  const listContacts({Key? key}) : super(key: key);
+class listContacts extends StatelessWidget {
+  listContacts({Key? key}) : super(key: key);
 
-  @override
-  State<listContacts> createState() => _listContactsState();
-}
+  get primaryColor => const Color.fromARGB(255, 45, 41, 66);
+  get secundaryColor => const Color.fromARGB(248, 240, 240, 240);
+  bool showLoading = false;
 
-get primaryColor => const Color.fromARGB(255, 45, 41, 66);
-get secundaryColor => const Color.fromARGB(248, 240, 240, 240);
-bool showLoading = false;
+  // ignore: unnecessary_new
+  final contactsBloc = new ContactsBloc();
 
-class _listContactsState extends State<listContacts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,20 +39,38 @@ class _listContactsState extends State<listContacts> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                child: TextField(
-                  cursorColor: const Color.fromARGB(255, 15, 15, 15),
-                  style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: TextFormField(
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search,
-                        color: Color.fromARGB(255, 0, 0, 0)),
-                    fillColor: const Color.fromARGB(255, 0, 0, 0),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          width: 3, color: Color.fromARGB(255, 45, 41, 66)),
-                      borderRadius: BorderRadius.circular(20),
+                    hintText: 'Search',
+                    hintStyle: GoogleFonts.poppins(
+                        fontSize: 14, color: secundaryColor),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: secundaryColor,
                     ),
+                    contentPadding: const EdgeInsets.all(12),
+                    fillColor: const Color(0xfffcf8ec),
                   ),
+                ),
+              ),
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: StreamBuilder(
+                  stream: contactsBloc.getContacts,
+                  builder: (
+                    _,
+                    AsyncSnapshot snapshot,
+                  ) {
+                    return ListView.builder(
+                      itemBuilder: (BuildContext context, int index) {
+                        return const ListTile(
+                          title: Text('contact'),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],

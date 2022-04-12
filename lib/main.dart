@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluechat/home.dart';
 import 'package:fluechat/pages/chat_page.dart';
-import 'package:fluechat/pages/index.dart';
-import 'package:fluechat/verify_code.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
@@ -20,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: flueHome(),
+      home: ChatPage(),
     );
   }
 }

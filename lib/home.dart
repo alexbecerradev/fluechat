@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fluechat/pages/chat_page.dart';
 import 'package:fluechat/pages/index.dart';
 import 'package:flutter/material.dart';
-import 'package:fluechat/main.dart';
 
 import 'firebase_options.dart';
 

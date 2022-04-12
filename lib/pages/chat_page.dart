@@ -141,12 +141,8 @@ class _ChatPageState extends State<ChatPage> {
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     onPressed: (() {
-                      setState(() {
-                        showLoading = true;
-                      });
                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => const listContacts()),
+                        MaterialPageRoute(builder: (context) => listContacts()),
                       );
                     }),
                     child: const Icon(Icons.sms),
